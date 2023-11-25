@@ -10,6 +10,10 @@ let registervalidator = [
         .notEmpty()
         .exists()
         .withMessage("Please Provide Valid Email"),
+        body("mobile")
+        .notEmpty()
+        .exists()
+        .withMessage("Please Provide Valid Mobile"),
     body("password")
         
         .notEmpty()
@@ -42,7 +46,6 @@ let loginvalidator = [
 
 router.post("/register", registervalidator,async (req, res) => {
     try {
-        
         await authcontroller.register(req, res);
     } catch (e) {
         console.log(e);
@@ -60,5 +63,13 @@ router.post("/login", loginvalidator, async (req, res) => {
     }
 })
 
-
+router.get("/users", async (req, res) => {
+    try {
+        
+        await authcontroller.currentUser(req, res);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+})
 module.exports = router;

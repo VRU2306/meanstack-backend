@@ -12,6 +12,9 @@ const uri = process.env.DATABASE_URI
     .replace("<password>", password);
 
 //Connection of mongodb url
+
+app.use(express.json());
+app.use(cors())
 mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
